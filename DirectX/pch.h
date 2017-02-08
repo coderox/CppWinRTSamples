@@ -1,5 +1,15 @@
 ﻿#pragma once
 
+#pragma comment(lib, "windowsapp")
+
+#include "winrt/Windows.UI.Core.h"
+#include "winrt/Windows.Graphics.Display.h"
+#include "winrt/Windows.ApplicationModel.Core.h"
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.UI.Composition.h"
+#include "winrt/Windows.ApplicationModel.Activation.h"
+#include "winrt/Windows.Storage.Streams.h"
+
 #include <wrl.h>
 #include <wrl/client.h>
 #include <dxgi1_4.h>
@@ -11,5 +21,4 @@
 #include <DirectXColors.h>
 #include <DirectXMath.h>
 #include <memory>
-#include <agile.h>
-#include <concrt.h>
+#include <future>

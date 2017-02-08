@@ -14,7 +14,7 @@ SampleFpsTextRenderer::SampleFpsTextRenderer(const std::shared_ptr<DX::DeviceRes
 	ZeroMemory(&m_textMetrics, sizeof(DWRITE_TEXT_METRICS));
 
 	// Create device independent resources
-	ComPtr<IDWriteTextFormat> textFormat;
+	winrt::com_ptr<IDWriteTextFormat> textFormat;
 	DX::ThrowIfFailed(
 		m_deviceResources->GetDWriteFactory()->CreateTextFormat(
 			L"Segoe UI",
@@ -24,12 +24,12 @@ SampleFpsTextRenderer::SampleFpsTextRenderer(const std::shared_ptr<DX::DeviceRes
 			DWRITE_FONT_STRETCH_NORMAL,
 			32.0f,
 			L"en-US",
-			&textFormat
+			winrt::put(textFormat)
 			)
 		);
 
 	DX::ThrowIfFailed(
-		textFormat.As(&m_textFormat)
+		DX::As(textFormat,m_textFormat)
 		);
 
 	DX::ThrowIfFailed(
@@ -37,7 +37,7 @@ SampleFpsTextRenderer::SampleFpsTextRenderer(const std::shared_ptr<DX::DeviceRes
 		);
 
 	DX::ThrowIfFailed(
-		m_deviceResources->GetD2DFactory()->CreateDrawingStateBlock(&m_stateBlock)
+		m_deviceResources->GetD2DFactory()->CreateDrawingStateBlock(winrt::put(m_stateBlock))
 		);
 
 	CreateDeviceDependentResources();
@@ -47,24 +47,24 @@ SampleFpsTextRenderer::SampleFpsTextRenderer(const std::shared_ptr<DX::DeviceRes
 void SampleFpsTextRenderer::Update(DX::StepTimer const& timer)
 {
 	// Update display text.
-	uint32 fps = timer.GetFramesPerSecond();
+	uint32_t fps = timer.GetFramesPerSecond();
 
 	m_text = (fps > 0) ? std::to_wstring(fps) + L" FPS" : L" - FPS";
 
-	ComPtr<IDWriteTextLayout> textLayout;
+	winrt::com_ptr<IDWriteTextLayout> textLayout;
 	DX::ThrowIfFailed(
 		m_deviceResources->GetDWriteFactory()->CreateTextLayout(
 			m_text.c_str(),
-			(uint32) m_text.length(),
-			m_textFormat.Get(),
+			(uint32_t) m_text.length(),
+			winrt::get(m_textFormat),
 			240.0f, // Max width of the input text.
 			50.0f, // Max height of the input text.
-			&textLayout
+			winrt::put(textLayout)
 			)
 		);
 
 	DX::ThrowIfFailed(
-		textLayout.As(&m_textLayout)
+		DX::As(textLayout,m_textLayout)
 		);
 
 	DX::ThrowIfFailed(
@@ -76,9 +76,9 @@ void SampleFpsTextRenderer::Update(DX::StepTimer const& timer)
 void SampleFpsTextRenderer::Render()
 {
 	ID2D1DeviceContext* context = m_deviceResources->GetD2DDeviceContext();
-	Windows::Foundation::Size logicalSize = m_deviceResources->GetLogicalSize();
+	winrt::Windows::Foundation::Size logicalSize = m_deviceResources->GetLogicalSize();
 
-	context->SaveDrawingState(m_stateBlock.Get());
+	context->SaveDrawingState(winrt::get(m_stateBlock));
 	context->BeginDraw();
 
 	// Position on the bottom right corner
@@ -95,8 +95,8 @@ void SampleFpsTextRenderer::Render()
 
 	context->DrawTextLayout(
 		D2D1::Point2F(0.f, 0.f),
-		m_textLayout.Get(),
-		m_whiteBrush.Get()
+		winrt::get(m_textLayout),
+		winrt::get(m_whiteBrush)
 		);
 
 	// Ignore D2DERR_RECREATE_TARGET here. This error indicates that the device
@@ -107,16 +107,16 @@ void SampleFpsTextRenderer::Render()
 		DX::ThrowIfFailed(hr);
 	}
 
-	context->RestoreDrawingState(m_stateBlock.Get());
+	context->RestoreDrawingState(winrt::get(m_stateBlock));
 }
 
 void SampleFpsTextRenderer::CreateDeviceDependentResources()
 {
 	DX::ThrowIfFailed(
-		m_deviceResources->GetD2DDeviceContext()->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::White), &m_whiteBrush)
+		m_deviceResources->GetD2DDeviceContext()->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::White), winrt::put(m_whiteBrush))
 		);
 }
 void SampleFpsTextRenderer::ReleaseDeviceDependentResources()
 {
-	m_whiteBrush.Reset();
+	m_whiteBrush = nullptr;
 }

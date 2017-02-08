@@ -11,7 +11,7 @@ namespace DirectX
 	{
 	public:
 		Sample3DSceneRenderer(const std::shared_ptr<DX::DeviceResources>& deviceResources);
-		void CreateDeviceDependentResources();
+		std::future<void> CreateDeviceDependentResourcesAsync();
 		void CreateWindowSizeDependentResources();
 		void ReleaseDeviceDependentResources();
 		void Update(DX::StepTimer const& timer);
@@ -30,16 +30,16 @@ namespace DirectX
 		std::shared_ptr<DX::DeviceResources> m_deviceResources;
 
 		// Direct3D resources for cube geometry.
-		Microsoft::WRL::ComPtr<ID3D11InputLayout>	m_inputLayout;
-		Microsoft::WRL::ComPtr<ID3D11Buffer>		m_vertexBuffer;
-		Microsoft::WRL::ComPtr<ID3D11Buffer>		m_indexBuffer;
-		Microsoft::WRL::ComPtr<ID3D11VertexShader>	m_vertexShader;
-		Microsoft::WRL::ComPtr<ID3D11PixelShader>	m_pixelShader;
-		Microsoft::WRL::ComPtr<ID3D11Buffer>		m_constantBuffer;
+		winrt::com_ptr<ID3D11InputLayout>	m_inputLayout;
+		winrt::com_ptr<ID3D11Buffer>		m_vertexBuffer;
+		winrt::com_ptr<ID3D11Buffer>		m_indexBuffer;
+		winrt::com_ptr<ID3D11VertexShader>	m_vertexShader;
+		winrt::com_ptr<ID3D11PixelShader>	m_pixelShader;
+		winrt::com_ptr<ID3D11Buffer>		m_constantBuffer;
 
 		// System resources for cube geometry.
 		ModelViewProjectionConstantBuffer	m_constantBufferData;
-		uint32	m_indexCount;
+		uint32_t	m_indexCount;
 
 		// Variables used with the rendering loop.
 		bool	m_loadingComplete;

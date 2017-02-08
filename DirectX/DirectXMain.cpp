@@ -3,9 +3,7 @@
 #include "Common\DirectXHelper.h"
 
 using namespace DirectX;
-using namespace Windows::Foundation;
-using namespace Windows::System::Threading;
-using namespace Concurrency;
+using namespace winrt::Windows::Foundation;
 
 // Loads and initializes application assets when the application is loaded.
 DirectXMain::DirectXMain(const std::shared_ptr<DX::DeviceResources>& deviceResources) :
@@ -94,7 +92,7 @@ void DirectXMain::OnDeviceLost()
 // Notifies renderers that device resources may now be recreated.
 void DirectXMain::OnDeviceRestored()
 {
-	m_sceneRenderer->CreateDeviceDependentResources();
+	m_sceneRenderer->CreateDeviceDependentResourcesAsync();
 	m_fpsTextRenderer->CreateDeviceDependentResources();
 	CreateWindowSizeDependentResources();
 }

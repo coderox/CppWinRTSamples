@@ -21,11 +21,11 @@ namespace DirectX
 		std::shared_ptr<DX::DeviceResources> m_deviceResources;
 
 		// Resources related to text rendering.
-		std::wstring                                    m_text;
-		DWRITE_TEXT_METRICS	                            m_textMetrics;
-		Microsoft::WRL::ComPtr<ID2D1SolidColorBrush>    m_whiteBrush;
-		Microsoft::WRL::ComPtr<ID2D1DrawingStateBlock1> m_stateBlock;
-		Microsoft::WRL::ComPtr<IDWriteTextLayout3>      m_textLayout;
-		Microsoft::WRL::ComPtr<IDWriteTextFormat2>      m_textFormat;
+		std::wstring                            m_text;
+		DWRITE_TEXT_METRICS	                    m_textMetrics;
+		winrt::com_ptr<ID2D1SolidColorBrush>    m_whiteBrush;
+		winrt::com_ptr<ID2D1DrawingStateBlock1> m_stateBlock;
+		winrt::com_ptr<IDWriteTextLayout3>      m_textLayout;
+		winrt::com_ptr<IDWriteTextFormat2>      m_textFormat;
 	};
 }
