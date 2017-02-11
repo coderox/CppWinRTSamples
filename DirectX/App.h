@@ -13,27 +13,27 @@ namespace DirectX
 		App();
 		
 		// IFrameworkView Methods.
-		virtual void Initialize(winrt::Windows::ApplicationModel::Core::CoreApplicationView applicationView);
-		virtual void SetWindow(winrt::Windows::UI::Core::CoreWindow window);
-		virtual void Load(winrt::hstring entryPoint);
+		virtual void Initialize(winrt::Windows::ApplicationModel::Core::CoreApplicationView const& applicationView);
+		virtual void SetWindow(winrt::Windows::UI::Core::CoreWindow const& window);
+		virtual void Load(winrt::hstring const& entryPoint);
 		virtual void Run();
 		virtual void Uninitialize();
 
 	protected:
 		// Application lifecycle event handlers.
-		void OnActivated(winrt::Windows::ApplicationModel::Core::CoreApplicationView applicationView, winrt::Windows::ApplicationModel::Activation::IActivatedEventArgs args);
-		void OnSuspending(winrt::Windows::IInspectable sender, winrt::Windows::ApplicationModel::SuspendingEventArgs args);
-		void OnResuming(winrt::Windows::IInspectable  sender, winrt::Windows::IInspectable args);
+		void OnActivated(winrt::Windows::ApplicationModel::Core::CoreApplicationView const& applicationView, winrt::Windows::ApplicationModel::Activation::IActivatedEventArgs const& args);
+		void OnSuspending(winrt::Windows::IInspectable const& sender, winrt::Windows::ApplicationModel::SuspendingEventArgs const& args);
+		void OnResuming(winrt::Windows::IInspectable  const& sender, winrt::Windows::IInspectable const& args);
 
 		// Window event handlers.
-		void OnWindowSizeChanged(winrt::Windows::UI::Core::CoreWindow sender, winrt::Windows::UI::Core::WindowSizeChangedEventArgs args);
-		void OnVisibilityChanged(winrt::Windows::UI::Core::CoreWindow sender, winrt::Windows::UI::Core::VisibilityChangedEventArgs args);
-		void OnWindowClosed(winrt::Windows::UI::Core::CoreWindow sender, winrt::Windows::UI::Core::CoreWindowEventArgs args);
+		void OnWindowSizeChanged(winrt::Windows::UI::Core::CoreWindow const& sender, winrt::Windows::UI::Core::WindowSizeChangedEventArgs const& args);
+		void OnVisibilityChanged(winrt::Windows::UI::Core::CoreWindow const& sender, winrt::Windows::UI::Core::VisibilityChangedEventArgs const& args);
+		void OnWindowClosed(winrt::Windows::UI::Core::CoreWindow const& sender, winrt::Windows::UI::Core::CoreWindowEventArgs const& args);
 
 		// DisplayInformation event handlers.
-		void OnDpiChanged(winrt::Windows::Graphics::Display::DisplayInformation sender, winrt::Windows::IInspectable args);
-		void OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayInformation sender, winrt::Windows::IInspectable  args);
-		void OnDisplayContentsInvalidated(winrt::Windows::Graphics::Display::DisplayInformation sender, winrt::Windows::IInspectable args);
+		void OnDpiChanged(winrt::Windows::Graphics::Display::DisplayInformation const& sender, winrt::Windows::IInspectable const& args);
+		void OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayInformation const& sender, winrt::Windows::IInspectable  const& args);
+		void OnDisplayContentsInvalidated(winrt::Windows::Graphics::Display::DisplayInformation const& sender, winrt::Windows::IInspectable const& args);
 
 	private:
 		std::shared_ptr<DX::DeviceResources> m_deviceResources;

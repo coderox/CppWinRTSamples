@@ -30,7 +30,7 @@ App::App() :
 }
 
 // The first method called when the IFrameworkView is being created.
-void App::Initialize(CoreApplicationView applicationView)
+void App::Initialize(CoreApplicationView const& applicationView)
 {
 	// Register event handlers for app lifecycle. This example includes Activated, so that we
 	// can make the CoreWindow active and start rendering on the window.
@@ -46,7 +46,7 @@ void App::Initialize(CoreApplicationView applicationView)
 }
 
 // Called when the CoreWindow object is created (or re-created).
-void App::SetWindow(CoreWindow window)
+void App::SetWindow(CoreWindow const& window)
 {
 	window.SizeChanged({ this, &App::OnWindowSizeChanged });
 
@@ -66,7 +66,7 @@ void App::SetWindow(CoreWindow window)
 }
 
 // Initializes scene resources, or loads a previously saved app state.
-void App::Load(winrt::hstring entryPoint)
+void App::Load(winrt::hstring const& entryPoint)
 {
 	if (m_main == nullptr)
 	{
@@ -106,13 +106,13 @@ void App::Uninitialize()
 
 // Application lifecycle event handlers.
 
-void App::OnActivated(CoreApplicationView applicationView, IActivatedEventArgs args)
+void App::OnActivated(CoreApplicationView const& applicationView, IActivatedEventArgs const& args)
 {
 	// Run() won't start until the CoreWindow is activated.
 	CoreWindow::GetForCurrentThread().Activate();
 }
 
-void App::OnSuspending(IInspectable sender, SuspendingEventArgs args)
+void App::OnSuspending(IInspectable const& sender, SuspendingEventArgs const& args)
 {
 	// Save app state asynchronously after requesting a deferral. Holding a deferral
 	// indicates that the application is busy performing suspending operations. Be
@@ -130,7 +130,7 @@ void App::OnSuspending(IInspectable sender, SuspendingEventArgs args)
 	});
 }
 
-void App::OnResuming(IInspectable sender, IInspectable args)
+void App::OnResuming(IInspectable const& sender, IInspectable const& args)
 {
 	// Restore any data or state that was unloaded on suspend. By default, data
 	// and state are persisted when resuming from suspend. Note that this event
@@ -141,25 +141,25 @@ void App::OnResuming(IInspectable sender, IInspectable args)
 
 // Window event handlers.
 
-void App::OnWindowSizeChanged(CoreWindow sender, WindowSizeChangedEventArgs args)
+void App::OnWindowSizeChanged(CoreWindow const& sender, WindowSizeChangedEventArgs const& args)
 {
 	m_deviceResources->SetLogicalSize(Size(sender.Bounds().Width, sender.Bounds().Height));
 	m_main->CreateWindowSizeDependentResources();
 }
 
-void App::OnVisibilityChanged(CoreWindow sender, VisibilityChangedEventArgs args)
+void App::OnVisibilityChanged(CoreWindow const& sender, VisibilityChangedEventArgs const& args)
 {
 	m_windowVisible = args.Visible();
 }
 
-void App::OnWindowClosed(CoreWindow sender, CoreWindowEventArgs args)
+void App::OnWindowClosed(CoreWindow const& sender, CoreWindowEventArgs const& args)
 {
 	m_windowClosed = true;
 }
 
 // DisplayInformation event handlers.
 
-void App::OnDpiChanged(DisplayInformation sender, IInspectable args)
+void App::OnDpiChanged(DisplayInformation const& sender, IInspectable const& args)
 {
 	// Note: The value for LogicalDpi retrieved here may not match the effective DPI of the app
 	// if it is being scaled for high resolution devices. Once the DPI is set on DeviceResources,
@@ -169,13 +169,13 @@ void App::OnDpiChanged(DisplayInformation sender, IInspectable args)
 	m_main->CreateWindowSizeDependentResources();
 }
 
-void App::OnOrientationChanged(DisplayInformation sender, IInspectable args)
+void App::OnOrientationChanged(DisplayInformation const& sender, IInspectable const& args)
 {
 	m_deviceResources->SetCurrentOrientation(sender.CurrentOrientation());
 	m_main->CreateWindowSizeDependentResources();
 }
 
-void App::OnDisplayContentsInvalidated(DisplayInformation sender, IInspectable args)
+void App::OnDisplayContentsInvalidated(DisplayInformation const& sender, IInspectable const& args)
 {
 	m_deviceResources->ValidateDevice();
 }

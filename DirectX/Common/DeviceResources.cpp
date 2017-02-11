@@ -477,7 +477,7 @@ void DX::DeviceResources::UpdateRenderTargetSize()
 }
 
 // This method is called when the CoreWindow is created (or re-created).
-void DX::DeviceResources::SetWindow(CoreWindow window)
+void DX::DeviceResources::SetWindow(CoreWindow const& window)
 {
 	DisplayInformation currentDisplayInformation = DisplayInformation::GetForCurrentView();
 
@@ -492,7 +492,7 @@ void DX::DeviceResources::SetWindow(CoreWindow window)
 }
 
 // This method is called in the event handler for the SizeChanged event.
-void DX::DeviceResources::SetLogicalSize(winrt::Windows::Foundation::Size logicalSize)
+void DX::DeviceResources::SetLogicalSize(winrt::Windows::Foundation::Size const& logicalSize)
 {
 	if (m_logicalSize.Width != logicalSize.Width || m_logicalSize.Height != logicalSize.Height)
 	{
@@ -517,7 +517,7 @@ void DX::DeviceResources::SetDpi(float dpi)
 }
 
 // This method is called in the event handler for the OrientationChanged event.
-void DX::DeviceResources::SetCurrentOrientation(DisplayOrientations currentOrientation)
+void DX::DeviceResources::SetCurrentOrientation(DisplayOrientations const& currentOrientation)
 {
 	if (m_currentOrientation != currentOrientation)
 	{

@@ -11,7 +11,7 @@ namespace DirectX
 	{
 	public:
 		Sample3DSceneRenderer(const std::shared_ptr<DX::DeviceResources>& deviceResources);
-		std::future<void> CreateDeviceDependentResourcesAsync();
+		winrt::fire_and_forget CreateDeviceDependentResources();
 		void CreateWindowSizeDependentResources();
 		void ReleaseDeviceDependentResources();
 		void Update(DX::StepTimer const& timer);

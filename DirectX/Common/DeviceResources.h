@@ -14,9 +14,9 @@ namespace DX
 	{
 	public:
 		DeviceResources();
-		void SetWindow(winrt::Windows::UI::Core::CoreWindow window);
-		void SetLogicalSize(winrt::Windows::Foundation::Size logicalSize);
-		void SetCurrentOrientation(winrt::Windows::Graphics::Display::DisplayOrientations currentOrientation);
+		void SetWindow(winrt::Windows::UI::Core::CoreWindow const&  window);
+		void SetLogicalSize(winrt::Windows::Foundation::Size const& logicalSize);
+		void SetCurrentOrientation(winrt::Windows::Graphics::Display::DisplayOrientations const& currentOrientation);
 		void SetDpi(float dpi);
 		void ValidateDevice();
 		void HandleDeviceLost();

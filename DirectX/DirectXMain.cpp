@@ -92,7 +92,7 @@ void DirectXMain::OnDeviceLost()
 // Notifies renderers that device resources may now be recreated.
 void DirectXMain::OnDeviceRestored()
 {
-	m_sceneRenderer->CreateDeviceDependentResourcesAsync();
+	m_sceneRenderer->CreateDeviceDependentResources();
 	m_fpsTextRenderer->CreateDeviceDependentResources();
 	CreateWindowSizeDependentResources();
 }

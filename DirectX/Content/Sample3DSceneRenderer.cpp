@@ -16,7 +16,7 @@ Sample3DSceneRenderer::Sample3DSceneRenderer(const std::shared_ptr<DX::DeviceRes
 	m_tracking(false),
 	m_deviceResources(deviceResources)
 {
-	CreateDeviceDependentResourcesAsync();
+	CreateDeviceDependentResources();
 	CreateWindowSizeDependentResources();
 }
 
@@ -183,7 +183,7 @@ void Sample3DSceneRenderer::Render()
 	);
 }
 
-std::future<void> Sample3DSceneRenderer::CreateDeviceDependentResourcesAsync()
+winrt::fire_and_forget Sample3DSceneRenderer::CreateDeviceDependentResources()
 {
 	// Load shaders asynchronously.
 
