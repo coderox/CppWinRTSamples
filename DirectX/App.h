@@ -7,7 +7,7 @@
 namespace DirectX
 {
 	// Main entry point for our app. Connects the app with the Windows shell and handles application lifecycle events.
-	struct App : winrt::implements<App, winrt::Windows::ApplicationModel::Core::IFrameworkView>
+	class App : public winrt::implements<App, winrt::Windows::ApplicationModel::Core::IFrameworkView>
 	{
 	public:
 		App();
@@ -19,7 +19,7 @@ namespace DirectX
 		virtual void Run();
 		virtual void Uninitialize();
 
-	protected:
+	private:
 		// Application lifecycle event handlers.
 		void OnActivated(winrt::Windows::ApplicationModel::Core::CoreApplicationView const& applicationView, winrt::Windows::ApplicationModel::Activation::IActivatedEventArgs const& args);
 		void OnSuspending(winrt::Windows::IInspectable const& sender, winrt::Windows::ApplicationModel::SuspendingEventArgs const& args);
@@ -35,7 +35,6 @@ namespace DirectX
 		void OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayInformation const& sender, winrt::Windows::IInspectable  const& args);
 		void OnDisplayContentsInvalidated(winrt::Windows::Graphics::Display::DisplayInformation const& sender, winrt::Windows::IInspectable const& args);
 
-	private:
 		std::shared_ptr<DX::DeviceResources> m_deviceResources;
 		std::unique_ptr<DirectXMain> m_main;
 		bool m_windowClosed;
@@ -43,9 +42,11 @@ namespace DirectX
 	};
 }
 
-struct Direct3DApplicationSource : winrt::implements<Direct3DApplicationSource, winrt::Windows::ApplicationModel::Core::IFrameworkViewSource>
+class Direct3DApplicationSource : public winrt::implements<Direct3DApplicationSource, winrt::Windows::ApplicationModel::Core::IFrameworkViewSource>
 {
+public:
 	winrt::Windows::ApplicationModel::Core::IFrameworkView CreateView();
+
 private:
 	DirectX::App m_app;
 };
